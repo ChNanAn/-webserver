@@ -14,6 +14,7 @@
 #include<signal.h>
 #include<stdarg.h>
 #include"locker.h"
+#include"lst_timer.h"
 
 
 class http_conn{
@@ -112,6 +113,7 @@ class http_conn{
 
     int bytes_to_send; //将要发送的数据的字节数
     int bytes_have_send;
+    //util_timer* time;    //定时器
 
 };
 #endif

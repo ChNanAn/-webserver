@@ -121,13 +121,13 @@ void http_conn::close_conn()
         m_index_read+=read_byte;
     }
 
-    printf("一次性读完数据:\n%s",m_read_buff);
+    //printf("一次性读完数据:\n%s",m_read_buff);
     return true;
  } 
 bool http_conn::write()
 {
     //
-    printf("一次性写完数据\n");
+   // printf("一次性写完数据\n");
         
         int temp=0;
         if(bytes_to_send==0){
@@ -206,7 +206,7 @@ void http_conn::process()//由工作线程调用，处理http请求的入口函�
 http_conn::HTTP_CODE http_conn::process_read()
 {
      //解析请求
-    printf("线程:%ld 开始解析请求\n",pthread_self());
+    //printf("线程:%ld 开始解析请求\n",pthread_self());
 
     LINE_STATE line_state=LINE_OK;
     HTTP_CODE ret=NO_REQUEST;
@@ -268,7 +268,7 @@ http_conn::HTTP_CODE http_conn::parse_requestline(char *text)  //解析请求行
     m_url=strpbrk(text," \t");
     
     *m_url++='\0';
-    printf(" 解析的方法:%s\n",text);   
+   // printf(" 解析的方法:%s\n",text);   
     //get\0/index.html http/1.1
     char *method=text;
     if(strcasecmp(method,"get")==0)
@@ -325,9 +325,9 @@ http_conn::HTTP_CODE http_conn::parse_requestline(char *text)  //解析请求行
     // if ( !m_url || m_url[0] != '/' ) {
     //     return BAD_REQUEST;
     // }
-     printf("版本:%s\n",m_version);   
-     printf("方法:%d\n",m_methon);
-     printf("URL:%s\n",m_url);
+    //  printf("版本:%s\n",m_version);   
+    //  printf("方法:%d\n",m_methon);
+    //  printf("URL:%s\n",m_url);
     m_check_state=CHECK_REQUESTHEAD;
     return NO_REQUEST;
     
@@ -362,7 +362,7 @@ http_conn::HTTP_CODE http_conn::parse_request_head(char *text)
         text+=strspn(text," \t");
         m_host=text;
     }else{
-        printf("oop! unknow header%s\n",text);
+       // printf("oop! unknow header%s\n",text);
     }
     return NO_REQUEST;
 
@@ -564,4 +564,6 @@ bool http_conn::add_status_line(int status,const char* status_title)
 
  }
   
+
+
 
